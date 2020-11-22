@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import './categories.dart';
 import './bestSellers.dart';
-import './cover.dart';
 //import './product.dart';
 
 void main() {
@@ -18,7 +17,6 @@ class MyApp extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Cover('./assets/pdc4.jpg', 'New Collection'),
               Categories(),
               Row(
                 children: [
