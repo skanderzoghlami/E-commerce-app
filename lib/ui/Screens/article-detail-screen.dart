@@ -70,7 +70,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         icon: Icon(
                           Icons.arrow_back,
                           size: 28,
-                          color: Color.fromRGBO(128, 128, 128, 1),
+                          color: Colors.grey[900],
                         ),
                         onPressed: () {
                           Navigator.pop(context);
