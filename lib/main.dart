@@ -1,4 +1,6 @@
+import 'package:ecommerceapp/ui/Screens/login-screen.dart';
 import 'package:ecommerceapp/ui/Screens/product-screen.dart';
+import 'package:ecommerceapp/ui/Screens/register-screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,6 +12,8 @@ void main() {
       // we will use named routes
       routes: {
         //'/': (context) => Home(),
+        'sign_in': (context) => LoginScreen(),
+        'sign_up': (context) => SignUpScreen(),
       },
       //initialRoute: '/',
     ),
