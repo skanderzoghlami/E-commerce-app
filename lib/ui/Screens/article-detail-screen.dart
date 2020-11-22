@@ -1,18 +1,21 @@
+import 'package:ecommerceapp/models/product.dart';
 import 'package:ecommerceapp/ui/Widgets/cart-counter.dart';
+import 'package:ecommerceapp/ui/Widgets/recommanded-article.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 
 class ProductDetailScreen extends StatefulWidget {
+  final Product article;
+
+  ProductDetailScreen({this.article});
+
   @override
   _ProductDetailScreenState createState() => _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  String description =
-      'Toss Pillows included\nTop seat top: 1"\nBetween arms: 55"\nArm width: 4"\nWeight Capacity: 500 lb\nProduct care: Spot clean with a damp cloth and water\nFrame Material: Solid Wood ';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,10 +49,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       child: Carousel(
                         boxFit: BoxFit.cover,
                         images: [
-                          AssetImage('assets/images/KennedyBarrelChair-1.jpg'),
+                          for (var i = 0; i < widget.article.images.length; i++)
+                            AssetImage(widget.article.images.elementAt(i)),
+
+                          /*AssetImage('assets/images/KennedyBarrelChair-1.jpg'),
                           AssetImage('assets/images/KennedyBarrelChair-2.jpg'),
                           AssetImage('assets/images/KennedyBarrelChair-3.jpg'),
-                          AssetImage('assets/images/KennedyBarrelChair-4.jpg'),
+                          AssetImage('assets/images/KennedyBarrelChair-4.jpg'),*/
                         ],
                         autoplay: false,
                         indicatorBgPadding: 24,
@@ -91,7 +97,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               Expanded(
                                 child: Container(
                                   child: Text(
-                                    "Kennedy Barrel Chair",
+                                    widget.article.aName,
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       color: Colors.black,
@@ -112,7 +118,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           Row(
                             children: <Widget>[
                               Text(
-                                "\$789.99",
+                                "\$${widget.article.price}",
                                 style: TextStyle(
                                     color: Color.fromRGBO(177, 30, 46, 1),
                                     fontSize: 20,
@@ -128,7 +134,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  "This oversized chair is perfect for those looking to spend hours sprawled out reading their favorite book or for those who just want to cuddle with the one they love. The barrel chair's handpicked fabric has a special sheen that creates a look of total elegance.",
+                                  widget.article.description,
                                   style: TextStyle(
                                       color: Colors.grey[500],
                                       fontSize: 16,
@@ -154,7 +160,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                         ),
                                       ),
                                       expanded: Text(
-                                        description,
+                                        widget.article.moreInfo,
                                         softWrap: true,
                                       ),
                                       // ignore: deprecated_member_use
@@ -194,150 +200,50 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        InkWell(
-                                          onTap: () => print("tpp"),
-                                          child: Container(
-                                            width: 100,
-                                            margin: EdgeInsets.only(
-                                              left: 5,
-                                              right: 5,
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  width: 90,
-                                                  height: 80,
-                                                  decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            'assets/images/Sofa.jpg'),
-                                                        fit: BoxFit.cover),
-                                                  ),
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Sofa',
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text('\$799'),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
+                                        RecommandedArticleView(
+                                          article: Product(
+                                            id: 2,
+                                            aName: 'Sofa',
+                                            description: 'Best sofa ever',
+                                            moreInfo: 'Color: Brown',
+                                            price: '799',
+                                            images: ['assets/images/Sofa.jpg'],
                                           ),
                                         ),
-                                        Container(
-                                          width: 100,
-                                          margin: EdgeInsets.only(
-                                            left: 5,
-                                            right: 5,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: 90,
-                                                height: 80,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/images/PinkCouch.jpg'),
-                                                      fit: BoxFit.cover),
-                                                ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Couch',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                  Text('\$989.99'),
-                                                ],
-                                              ),
+                                        RecommandedArticleView(
+                                          article: Product(
+                                            id: 3,
+                                            aName: 'Couch',
+                                            description: 'Comfy comfy',
+                                            moreInfo: 'Color: Pink',
+                                            price: '989.99',
+                                            images: [
+                                              'assets/images/PinkCouch.jpg'
                                             ],
                                           ),
                                         ),
-                                        Container(
-                                          width: 100,
-                                          margin: EdgeInsets.only(
-                                            left: 5,
-                                            right: 5,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: 90,
-                                                height: 80,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/images/DinnerTable.jpg'),
-                                                      fit: BoxFit.cover),
-                                                ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Dinner table',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                  Text('\$759.99'),
-                                                ],
-                                              ),
+                                        RecommandedArticleView(
+                                          article: Product(
+                                            id: 4,
+                                            aName: 'Dinner table',
+                                            description: 'Best for family',
+                                            moreInfo: 'Color: Black',
+                                            price: '759.99',
+                                            images: [
+                                              'assets/images/DinnerTable.jpg'
                                             ],
                                           ),
                                         ),
-                                        Container(
-                                          width: 100,
-                                          margin: EdgeInsets.only(
-                                            left: 5,
-                                            right: 5,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: 90,
-                                                height: 80,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/images/BlackBed.jpg'),
-                                                      fit: BoxFit.cover),
-                                                ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Bed',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                  Text('\$574.99'),
-                                                ],
-                                              ),
+                                        RecommandedArticleView(
+                                          article: Product(
+                                            id: 4,
+                                            aName: 'Bed',
+                                            description:
+                                                'This bed got your back for romantic nights ;)',
+                                            moreInfo: 'Color: Black',
+                                            price: '574.99',
+                                            images: [
+                                              'assets/images/BlackBed.jpg'
                                             ],
                                           ),
                                         ),
