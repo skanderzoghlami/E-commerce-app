@@ -65,77 +65,78 @@ class _BagArticleState extends State<BagArticle> {
             ),
             Container(
               child: Expanded(
-                  child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            widget.aName,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              widget.aName,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        Container(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "\$${widget.price}",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "\$${widget.price}",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 7,
-                        ),
-                        Container(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Color : ${widget.description}",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
+                          SizedBox(
+                            height: 7,
+                          ),
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Color : ${widget.description}",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        InkWell(
-                          /*splashColor: Colors.transparent,
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            /*splashColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           focusColor: Colors.transparent,*/
-                          child: Icon(CupertinoIcons.delete),
-                          onTap: () {
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 21,
-                        ),
-                        Container(
-                          child: CartCounter(),
-                        )
-                      ],
+                            child: Icon(CupertinoIcons.delete),
+                            onTap: () {
+                              return null;
+                            },
+                          ),
+                          SizedBox(
+                            height: 21,
+                          ),
+                          Container(
+                            child: CartCounter(),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              )),
-            )
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
