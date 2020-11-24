@@ -39,76 +39,80 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-        key: _scaffoldKey,
-        backgroundColor: Style.darkColor,
-        body: ListView(
-          children: <Widget>[
-            SizedBox(height: SizeConfig.screenHeight * 0.1),
-            Center(
-              child: Text('Log in now', style: Style.appNameTextStyle),
-            ),
-            SizedBox(height: SizeConfig.screenHeight * 0.1),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: SizeConfig.blockSizeHorizental * 4),
-              child: Form(
-                  key: _key,
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: SizeConfig.blockSizeVertical * 2),
-                      TextFormField(
-                          controller: _email,
-                          onSaved: (v) {
-                            // user.email = v ;
-                          },
-                          decoration: Style.inputDecoration('Email'),
-                          validator: (v) {
-                            if (v.isEmpty) {
-                              return 'this field is required';
-                            } else if (false) {
-                              return 'e-mail is not valid';
-                            } else {
-                              return null;
-                            }
-                          }),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 2),
-                      TextFormField(
-                          controller: _password,
-                          onSaved: (v) {
-                            // user.password = v ;
-                          },
-                          obscureText: true,
-                          decoration: Style.inputDecoration('Password'),
-                          validator: (v) {
-                            if (v.isEmpty) {
-                              return 'this field is required';
-                            } else if (v.trim().length < 6) {
-                              return 'password too short';
-                            } else {
-                              return null;
-                            }
-                          }),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 2),
-                    ],
-                  )),
-            )
-          ],
+      key: _scaffoldKey,
+      backgroundColor: Style.darkColor,
+      body: ListView(
+        children: <Widget>[
+          SizedBox(height: SizeConfig.screenHeight * 0.1),
+          Center(
+            child: Text('Log in now', style: Style.appNameTextStyle),
+          ),
+          SizedBox(height: SizeConfig.screenHeight * 0.1),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: SizeConfig.blockSizeHorizental * 4),
+            child: Form(
+                key: _key,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: SizeConfig.blockSizeVertical * 2),
+                    TextFormField(
+                      controller: _email,
+                      onSaved: (v) {
+                        // user.email = v ;
+                      },
+                      decoration: Style.inputDecoration('Email'),
+                      validator: (v) {
+                        if (v.isEmpty) {
+                          return 'this field is required';
+                        } else if (false) {
+                          return 'e-mail is not valid';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(height: SizeConfig.blockSizeVertical * 2),
+                    TextFormField(
+                        controller: _password,
+                        onSaved: (v) {
+                          // user.password = v ;
+                        },
+                        obscureText: true,
+                        decoration: Style.inputDecoration('Password'),
+                        validator: (v) {
+                          if (v.isEmpty) {
+                            return 'this field is required';
+                          } else if (v.trim().length < 6) {
+                            return 'password too short';
+                          } else {
+                            return null;
+                          }
+                        }),
+                    SizedBox(height: SizeConfig.blockSizeVertical * 2),
+                  ],
+                )),
+          )
+        ],
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(vertical: 12),
+        child: PrimaryButton(
+          child: Text(
+            'save',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 32),
+          ),
+          onTap: () async {
+            if (_key.currentState.validate()) {
+              print('isValidate');
+            } else {
+              print('not validate');
+            }
+            print('done');
+          },
         ),
-        bottomNavigationBar: Container(
-            padding: EdgeInsets.symmetric(vertical: 12),
-            child: PrimaryButton(
-                child: Text(
-                  'save',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 32),
-                ),
-                onTap: () async {
-                  if (_key.currentState.validate()) {
-                    print('isValidate');
-                  } else {
-                    print('not validate');
-                  }
-                  print('done');
-                })));
+      ),
+    );
   }
 }
