@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/ui/Screens/admin-screen.dart';
 import 'package:ecommerceapp/ui/Screens/choose-screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
@@ -36,7 +37,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 },
               ))),
           Container(color: Colors.blue, child: Center(child: Text("My cart"))),
-          Container(color: Colors.orange, child: Center(child: Text("Admin"))),
+          AdminScreen(),
         ],
       ),
       bottomNavigationBar: BubbleBottomBar(

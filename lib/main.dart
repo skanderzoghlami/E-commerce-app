@@ -31,7 +31,7 @@ class _MyAppState extends State {
   void initState() {
     super.initState();
     new Future.delayed(
-        const Duration(seconds: 10),
+        const Duration(seconds: 2),
         () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => ProductScreen()),
