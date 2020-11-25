@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/models/product.dart';
+import 'package:ecommerceapp/models/products.dart';
 import 'package:ecommerceapp/ui/Widgets/cart-counter.dart';
 import 'package:ecommerceapp/ui/Widgets/recommanded-article.dart';
 import 'package:expandable/expandable.dart';
@@ -8,6 +9,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final Product article;
+  var isFav = false;
 
   ProductDetailScreen({this.article});
 
@@ -53,13 +55,36 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             AssetImage(widget.article.images.elementAt(i)),
 
                           /*AssetImage('assets/images/KennedyBarrelChair-1.jpg'),
-                          AssetImage('assets/images/KennedyBarrelChair-2.jpg'),
-                          AssetImage('assets/images/KennedyBarrelChair-3.jpg'),
-                          AssetImage('assets/images/KennedyBarrelChair-4.jpg'),*/
+                              AssetImage('assets/images/KennedyBarrelChair-2.jpg'),
+                              AssetImage('assets/images/KennedyBarrelChair-3.jpg'),
+                              AssetImage('assets/images/KennedyBarrelChair-4.jpg'),*/
                         ],
                         autoplay: false,
                         indicatorBgPadding: 24,
                         dotBgColor: Colors.transparent,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 5),
+                      width: MediaQuery.of(context).size.width,
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: IconButton(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          icon: Icon(
+                            widget.isFav
+                                ? CupertinoIcons.heart_fill
+                                : CupertinoIcons.heart,
+                            size: 32,
+                            color: widget.isFav ? Colors.red : Colors.grey[900],
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.isFav = !widget.isFav;
+                            });
+                          },
+                        ),
                       ),
                     ),
                     Padding(
@@ -199,55 +224,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      children: [
-                                        RecommandedArticleView(
-                                          article: Product(
-                                            id: 2,
-                                            aName: 'Sofa',
-                                            description: 'Best sofa ever',
-                                            moreInfo: 'Color: Brown',
-                                            price: '799',
-                                            images: ['assets/images/Sofa.jpg'],
-                                          ),
-                                        ),
-                                        RecommandedArticleView(
-                                          article: Product(
-                                            id: 3,
-                                            aName: 'Couch',
-                                            description: 'Comfy comfy',
-                                            moreInfo: 'Color: Pink',
-                                            price: '989.99',
-                                            images: [
-                                              'assets/images/PinkCouch.jpg'
-                                            ],
-                                          ),
-                                        ),
-                                        RecommandedArticleView(
-                                          article: Product(
-                                            id: 4,
-                                            aName: 'Dinner table',
-                                            description: 'Best for family',
-                                            moreInfo: 'Color: Black',
-                                            price: '759.99',
-                                            images: [
-                                              'assets/images/DinnerTable.jpg'
-                                            ],
-                                          ),
-                                        ),
-                                        RecommandedArticleView(
-                                          article: Product(
-                                            id: 4,
-                                            aName: 'Bed',
-                                            description:
-                                                'This bed got your back for romantic nights ;)',
-                                            moreInfo: 'Color: Black',
-                                            price: '574.99',
-                                            images: [
-                                              'assets/images/BlackBed.jpg'
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                                      children: generateRecommandedItems(),
                                     ),
                                   ),
                                 ),
@@ -268,5 +245,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ),
       ),
     );
+  }
+
+  List<RecommandedArticleView> generateRecommandedItems() {
+    List<RecommandedArticleView> l = [];
+    for (var i = 0; i < allProducts.length; i++) {
+      if (allProducts.elementAt(i).id != widget.article.id)
+        l.add(
+          RecommandedArticleView(
+            article: allProducts.elementAt(i),
+          ),
+        );
+    }
+    return l;
   }
 }

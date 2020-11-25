@@ -129,7 +129,7 @@ class _BagArticleState extends State<BagArticle> {
                           ),
                           Container(
                             child: CartCounter(),
-                          )
+                          ),
                         ],
                       ),
                     ),
