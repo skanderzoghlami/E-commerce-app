@@ -66,6 +66,9 @@ class _MyState extends State<Product> {
             child: Align(
               alignment: Alignment.topRight,
               child: IconButton(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                focusColor: Colors.transparent,
                 icon: isFav
                     ? Icon(Icons.favorite, color: Colors.red)
                     : Icon(Icons.favorite_outline, color: Colors.black),

@@ -10,14 +10,52 @@ class Cover extends StatelessWidget {
         //width: 300,
         //height: 300,
         //child:
-        Stack(alignment: Alignment.center, children: <Widget>[
+        Stack(children: <Widget>[
       Container(
         //height: MediaQuery.of(context).size.height * 0.4,
-        height: MediaQuery.of(context).size.height * 0.3,
+        //height: MediaQuery.of(context).size.height * 0.3,
+        height: 300,
         width: double.infinity,
-        child: Image(
-          image: AssetImage(img),
-          fit: BoxFit.fitWidth,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(img),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                margin: EdgeInsets.only(
+                  bottom: 10,
+                  left: 20,
+                ),
+                child: Text(
+                  txt,
+                  style: TextStyle(
+                    fontSize: 34,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                  bottom: 40,
+                  left: 20,
+                ),
+                child: Text(
+                  "The top design trends in 2020",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       //child: Image.asset(img),
@@ -28,10 +66,6 @@ class Cover extends StatelessWidget {
         height: 300,
         width: double.infinity,*/
       //fit : BoxFit.cover,
-      Text(
-        txt,
-        style: TextStyle(fontSize: 26, color: Colors.white),
-      ),
     ]);
   }
 }

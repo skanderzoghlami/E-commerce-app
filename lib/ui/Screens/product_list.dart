@@ -11,27 +11,35 @@ class ProductList extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Cover('assets/imagesproduct/pdc4.jpg', 'New Collection'),
-              Categories(),
-              Row(
-                children: [
-                  Text(
-                    'Best Sellers',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                ],
-              ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Cover('assets/imagesproduct/pdc4.jpg', 'New Collection'),
+                Categories(),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Best Sellers',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
 
-              //Center(
-              //child:
-              BestSellers(),
-              //),
-              //Product('./assets/table.jpg', 'Table', '200DT'),
-            ],
+                //Center(
+                //child:
+                BestSellers(),
+                //),
+                //Product('./assets/table.jpg', 'Table', '200DT'),
+              ],
+            ),
           ),
         ),
       ),

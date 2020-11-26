@@ -16,7 +16,10 @@ class Categories extends StatelessWidget {
               child: Text(
                 'Categories',
                 textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 26),
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
             Row(
