@@ -1,5 +1,5 @@
-import 'package:ecommerceapp/ui/Widgets/custom-container.dart';
-import 'package:ecommerceapp/ui/Widgets/custum-content.dart';
+import 'package:ecommerceapp/ui/Widgets/custom_container.dart';
+import 'package:ecommerceapp/ui/Widgets/custum_content.dart';
 import 'package:flutter/material.dart';
 
 import '../style.dart';
@@ -70,7 +70,10 @@ class _AdminScreenState extends State<AdminScreen> {
                       color: satisfactionColor,
                       size: 65.0,
                     ),
-                    Divider(height: 10.0, color: Colors.transparent,),
+                    Divider(
+                      height: 10.0,
+                      color: Colors.transparent,
+                    ),
                     Text(
                       'SATISFACTION',
                       style: TextStyle(color: Colors.white, fontSize: 24.0),

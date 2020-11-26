@@ -1,4 +1,4 @@
-import 'package:ecommerceapp/ui/Widgets/cart-counter.dart';
+import 'package:ecommerceapp/ui/Widgets/cart_counter.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

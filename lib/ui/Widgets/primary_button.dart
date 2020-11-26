@@ -1,4 +1,4 @@
-import 'package:ecommerceapp/ui/size-config.dart';
+import 'package:ecommerceapp/ui/size_config.dart';
 import 'package:ecommerceapp/ui/style.dart';
 import 'package:flutter/material.dart';
 

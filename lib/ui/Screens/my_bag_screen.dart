@@ -1,4 +1,4 @@
-import 'package:ecommerceapp/ui/Widgets/bag-article.dart';
+import 'package:ecommerceapp/ui/Widgets/bag_article.dart';
 import 'package:flutter/material.dart';
 
 class MyBagScreen extends StatefulWidget {

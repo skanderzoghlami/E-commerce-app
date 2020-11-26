@@ -1,6 +1,6 @@
-import 'package:ecommerceapp/ui/Screens/login-screen.dart';
-import 'package:ecommerceapp/ui/Screens/product-screen.dart';
-import 'package:ecommerceapp/ui/Screens/register-screen.dart';
+import 'package:ecommerceapp/ui/Screens/login_screen.dart';
+import 'package:ecommerceapp/ui/Screens/product_screen.dart';
+import 'package:ecommerceapp/ui/Screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

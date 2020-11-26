@@ -1,7 +1,7 @@
-import 'package:ecommerceapp/ui/Screens/admin-screen.dart';
-import 'package:ecommerceapp/ui/Screens/article-detail-screen.dart';
-import 'package:ecommerceapp/ui/Screens/choose-screen.dart';
-import 'package:ecommerceapp/ui/Screens/my_bag-screen.dart';
+import 'package:ecommerceapp/ui/Screens/admin_screen.dart';
+import 'package:ecommerceapp/ui/Screens/article_detail_screen.dart';
+import 'package:ecommerceapp/ui/Screens/choose_screen.dart';
+import 'package:ecommerceapp/ui/Screens/my_bag_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 
@@ -51,25 +51,9 @@ class _ProductScreenState extends State<ProductScreen> {
               ),
             ),
           ),
-          Container(
-              color: Colors.green,
-              child: Center(
-                  child: RaisedButton(
-                child: Text("Login"),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => (WelcomeScreen())),
-                  );
-                },
-              ))),
-<<<<<<< HEAD
-          Container(color: Colors.blue, child: Center(child: Text("My cart"))),
-          AdminScreen(),
-=======
+          WelcomeScreen(),
           MyBagScreen(),
-          Container(color: Colors.orange, child: Center(child: Text("Admin"))),
->>>>>>> dev
+          AdminScreen(),
         ],
       ),
       bottomNavigationBar: BubbleBottomBar(

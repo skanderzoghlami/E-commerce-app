@@ -1,7 +1,7 @@
-import 'package:ecommerceapp/ui/Screens/login-screen.dart';
-import 'package:ecommerceapp/ui/Screens/register-screen.dart';
-import 'package:ecommerceapp/ui/Widgets/primary-button.dart';
-import 'package:ecommerceapp/ui/size-config.dart';
+import 'package:ecommerceapp/ui/Screens/login_screen.dart';
+import 'package:ecommerceapp/ui/Screens/register_screen.dart';
+import 'package:ecommerceapp/ui/Widgets/primary_button.dart';
+import 'package:ecommerceapp/ui/size_config.dart';
 import 'package:ecommerceapp/ui/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
