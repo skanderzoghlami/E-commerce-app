@@ -1,8 +1,6 @@
 import 'package:ecommerceapp/ui/Widgets/custom_container.dart';
-import 'package:ecommerceapp/ui/Widgets/custum_content.dart';
+import 'package:ecommerceapp/ui/Widgets/custom_content.dart';
 import 'package:flutter/material.dart';
-
-import '../style.dart';
 
 class AdminScreen extends StatefulWidget {
   @override

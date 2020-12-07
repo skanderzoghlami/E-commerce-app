@@ -1,4 +1,4 @@
-import 'package:ecommerceapp/ui/Widgets/cart_counter.dart';
+/*
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,8 +9,15 @@ class BagArticle extends StatefulWidget {
   final int quantity;
   final String imgPath;
 
+  int numOfItems;
+
   BagArticle(
-      {this.aName, this.description, this.price, this.quantity, this.imgPath});
+      {this.aName,
+      this.description,
+      this.price,
+      this.quantity,
+      this.imgPath,
+      this.numOfItems = 1});
   @override
   _BagArticleState createState() => _BagArticleState();
 }
@@ -117,8 +124,8 @@ class _BagArticleState extends State<BagArticle> {
                         children: [
                           InkWell(
                             /*splashColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          focusColor: Colors.transparent,*/
+                              highlightColor: Colors.transparent,
+                              focusColor: Colors.transparent,*/
                             child: Icon(CupertinoIcons.delete),
                             onTap: () {
                               return null;
@@ -128,8 +135,38 @@ class _BagArticleState extends State<BagArticle> {
                             height: 21,
                           ),
                           Container(
-                            child: CartCounter(),
-                          )
+                            child: Row(
+                              children: <Widget>[
+                                buildOutlineButton(
+                                  icon: Icons.remove,
+                                  press: () {
+                                    if (widget.numOfItems > 1) {
+                                      setState(() {
+                                        widget.numOfItems--;
+                                      });
+                                    }
+                                  },
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(7),
+                                  child: Text(
+                                    widget.numOfItems
+                                        .toString()
+                                        .padLeft(2, "0"),
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                  ),
+                                ),
+                                buildOutlineButton(
+                                    icon: Icons.add,
+                                    press: () {
+                                      setState(() {
+                                        widget.numOfItems++;
+                                      });
+                                    }),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -142,4 +179,20 @@ class _BagArticleState extends State<BagArticle> {
       ),
     );
   }
+
+  SizedBox buildOutlineButton({IconData icon, Function press}) {
+    return SizedBox(
+      width: 28,
+      height: 25,
+      child: OutlineButton(
+        padding: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        onPressed: press,
+        child: Icon(icon),
+      ),
+    );
+  }
 }
+*/

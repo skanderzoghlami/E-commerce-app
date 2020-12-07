@@ -1,27 +1,63 @@
+import 'package:ecommerceapp/models/bagProducts.dart';
+import 'package:ecommerceapp/models/product.dart';
+import 'package:ecommerceapp/models/products.dart';
 import 'package:ecommerceapp/ui/Widgets/cart_counter.dart';
+import 'package:ecommerceapp/ui/Widgets/recommanded_article_view.dart';
+
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 
 class ProductDetailScreen extends StatefulWidget {
+  final Product article;
+  var isFav = false;
+
+  ProductDetailScreen({this.article});
+
   @override
   _ProductDetailScreenState createState() => _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  String description =
-      'Toss Pillows included\nTop seat top: 1"\nBetween arms: 55"\nArm width: 4"\nWeight Capacity: 500 lb\nProduct care: Spot clean with a damp cloth and water\nFrame Material: Solid Wood ';
-
   @override
   Widget build(BuildContext context) {
+    var cartCounter = CartCounter();
     return Scaffold(
       floatingActionButton: Container(
         width: MediaQuery.of(context).size.width * 0.8,
         height: 60,
         child: FloatingActionButton.extended(
           onPressed: () {
-            // Add your onPressed code here!
+            bool found = false;
+            for (var i = 0; i < bagProducts.length; i++) {
+              if (bagProducts.elementAt(i).id == widget.article.id) {
+                found = true;
+                quantities[i] += cartCounter.numOfItems;
+                break;
+              }
+            }
+            if (!found) {
+              bagProducts.add(widget.article);
+              quantities.add(cartCounter.numOfItems);
+            }
+            return showDialog(
+              context: context,
+              child: AlertDialog(
+                title: Text("Added to bag"),
+                content: Text(
+                  'This item has been added to your bag',
+                  textAlign: TextAlign.left,
+                ),
+                actions: [
+                  FlatButton(
+                    child: Text("Understood!"),
+                    onPressed: () => Navigator.of(context, rootNavigator: true)
+                        .pop('dialog'),
+                  )
+                ],
+              ),
+            );
           },
           label: Text(
             'ADD TO BAG',
@@ -40,31 +76,61 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               children: <Widget>[
                 Stack(
                   children: [
+                    InkWell(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.width * 0.8,
+                        child: Carousel(
+                          boxFit: BoxFit.cover,
+                          images: [
+                            for (var i = 0;
+                                i < widget.article.images.length;
+                                i++)
+                              AssetImage(widget.article.images.elementAt(i)),
+                          ],
+                          autoplay: false,
+                          indicatorBgPadding: 24,
+                          dotBgColor: Colors.transparent,
+                        ),
+                      ),
+                      onDoubleTap: () {
+                        setState(() {
+                          widget.isFav = !widget.isFav;
+                        });
+                      },
+                    ),
                     Container(
+                      padding: EdgeInsets.only(top: 15),
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.width * 0.8,
-                      child: Carousel(
-                        boxFit: BoxFit.cover,
-                        images: [
-                          AssetImage('assets/images/KennedyBarrelChair-1.jpg'),
-                          AssetImage('assets/images/KennedyBarrelChair-2.jpg'),
-                          AssetImage('assets/images/KennedyBarrelChair-3.jpg'),
-                          AssetImage('assets/images/KennedyBarrelChair-4.jpg'),
-                        ],
-                        autoplay: false,
-                        indicatorBgPadding: 24,
-                        dotBgColor: Colors.transparent,
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: IconButton(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          icon: Icon(
+                            widget.isFav
+                                ? CupertinoIcons.heart_fill
+                                : CupertinoIcons.heart,
+                            size: 32,
+                            color: widget.isFav ? Colors.red : Colors.grey[900],
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.isFav = !widget.isFav;
+                            });
+                          },
+                        ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 5),
+                      padding: EdgeInsets.only(top: 15),
                       child: IconButton(
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         icon: Icon(
                           Icons.arrow_back,
                           size: 28,
-                          color: Color.fromRGBO(128, 128, 128, 1),
+                          color: Colors.grey[900],
                         ),
                         onPressed: () {
                           Navigator.pop(context);
@@ -91,7 +157,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               Expanded(
                                 child: Container(
                                   child: Text(
-                                    "Kennedy Barrel Chair",
+                                    widget.article.aName,
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       color: Colors.black,
@@ -102,7 +168,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 ),
                               ),
                               Container(
-                                child: CartCounter(),
+                                child: cartCounter,
                               )
                             ],
                           ),
@@ -112,7 +178,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           Row(
                             children: <Widget>[
                               Text(
-                                "\$789.99",
+                                "\$${widget.article.price}",
                                 style: TextStyle(
                                     color: Color.fromRGBO(177, 30, 46, 1),
                                     fontSize: 20,
@@ -128,7 +194,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  "This oversized chair is perfect for those looking to spend hours sprawled out reading their favorite book or for those who just want to cuddle with the one they love. The barrel chair's handpicked fabric has a special sheen that creates a look of total elegance.",
+                                  widget.article.description,
                                   style: TextStyle(
                                       color: Colors.grey[500],
                                       fontSize: 16,
@@ -154,7 +220,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                         ),
                                       ),
                                       expanded: Text(
-                                        description,
+                                        widget.article.moreInfo,
                                         softWrap: true,
                                       ),
                                       // ignore: deprecated_member_use
@@ -193,155 +259,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      children: [
-                                        InkWell(
-                                          onTap: () => print("tpp"),
-                                          child: Container(
-                                            width: 100,
-                                            margin: EdgeInsets.only(
-                                              left: 5,
-                                              right: 5,
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  width: 90,
-                                                  height: 80,
-                                                  decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            'assets/images/Sofa.jpg'),
-                                                        fit: BoxFit.cover),
-                                                  ),
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Sofa',
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text('\$799'),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 100,
-                                          margin: EdgeInsets.only(
-                                            left: 5,
-                                            right: 5,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: 90,
-                                                height: 80,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/images/PinkCouch.jpg'),
-                                                      fit: BoxFit.cover),
-                                                ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Couch',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                  Text('\$989.99'),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 100,
-                                          margin: EdgeInsets.only(
-                                            left: 5,
-                                            right: 5,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: 90,
-                                                height: 80,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/images/DinnerTable.jpg'),
-                                                      fit: BoxFit.cover),
-                                                ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Dinner table',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                  Text('\$759.99'),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 100,
-                                          margin: EdgeInsets.only(
-                                            left: 5,
-                                            right: 5,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: 90,
-                                                height: 80,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/images/BlackBed.jpg'),
-                                                      fit: BoxFit.cover),
-                                                ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Bed',
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                  Text('\$574.99'),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                                      children: generateRecommandedItems(),
                                     ),
                                   ),
                                 ),
@@ -362,5 +280,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ),
       ),
     );
+  }
+
+  List<RecommandedArticleView> generateRecommandedItems() {
+    List<RecommandedArticleView> l = [];
+    for (var i = 0; i < allProducts.length; i++) {
+      if (allProducts.elementAt(i).id != widget.article.id)
+        l.add(
+          RecommandedArticleView(
+            article: allProducts.elementAt(i),
+          ),
+        );
+    }
+    return l;
   }
 }

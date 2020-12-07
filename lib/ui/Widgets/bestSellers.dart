@@ -1,4 +1,5 @@
-import 'package:ecommerceapp/models/product.dart';
+import 'package:ecommerceapp/models/products.dart';
+import 'package:ecommerceapp/ui/Widgets/product_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 
@@ -32,13 +33,10 @@ class _MyState extends State<BestSellers> {
       crossAxisSpacing: 7,
       mainAxisSpacing: 7,
       children: <Widget>[
-        Product('assets/imagesproduct/table.jpg', 'Table', '200'),
-        Product('assets/imagesproduct/sofabs2.jpg', 'Sofa', '1000'),
-        Product('assets/imagesproduct/sofabs4.jpg', 'Chair', '600'),
-        Product('assets/imagesproduct/lampe4.jpg', 'Lamp', '50'),
-        Product('assets/imagesproduct/sofa16.jpg', 'Sofa', '2050'),
-        Product('assets/imagesproduct/bureau.jpg', 'Desk', '150'),
-        Product('assets/imagesproduct/chairvert.jpg', 'chair', '60'),
+        for (var i = 0; i < allProducts.length; i++)
+          ProductView(
+            article: allProducts.elementAt(i),
+          ),
       ],
       //)
     );

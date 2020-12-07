@@ -1,5 +1,5 @@
+import 'package:ecommerceapp/models/bagProducts.dart';
 import 'package:ecommerceapp/ui/Screens/admin_screen.dart';
-import 'package:ecommerceapp/ui/Screens/article_detail_screen.dart';
 import 'package:ecommerceapp/ui/Screens/choose_screen.dart';
 import 'package:ecommerceapp/ui/Screens/my_bag_screen.dart';
 import 'package:ecommerceapp/ui/Screens/product_list.dart';
@@ -120,6 +120,25 @@ class _ProductScreenState extends State<ProductScreen> {
               ),
               title: Text("Admin")),
         ],
+      ),
+      floatingActionButton:
+          (currentIndex == 2 && bagProducts.length > 0) ? payButton() : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  Widget payButton() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.8,
+      height: 60,
+      child: FloatingActionButton.extended(
+        onPressed: () {},
+        label: Text(
+          'Pay',
+          style: TextStyle(fontSize: 18),
+        ),
+        icon: Icon(Icons.add_shopping_cart),
+        backgroundColor: Colors.black,
       ),
     );
   }
